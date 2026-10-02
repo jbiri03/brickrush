@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrickRush</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <div class="brand-lockup">
+                <span class="brand-mark" aria-hidden="true">BR</span>
+                <div>
+                    <p class="brand-kicker">COIN-OP / 01</p>
+                    <h1>BrickRush</h1>
+                </div>
+            </div>
+            <span class="mode-tag"><span class="mode-dot"></span>ENDLESS RUN</span>
+        </header>
+
+        <main class="game-shell">
+            <div class="section-heading">
+                <span>PLAYFIELD</span>
+                <span class="live-indicator"><span></span>LIVE</span>
+            </div>
+
+            <header class="hud" aria-label="Game status">
+                <div class="stat-block score-stat">
+                    <span class="stat-label">SCORE</span>
+                    <strong id="score">000000</strong>
+                </div>
+                <div class="stat-block lives-stat">
+                    <span class="stat-label">LIVES</span>
+                    <strong id="lives">03</strong>
+                </div>
+                <div class="stat-block level-stat">
+                    <span class="stat-label">LEVEL</span>
+                    <strong id="level">01</strong>
+                    <span id="unlockedLevel" class="best-level">BEST 01</span>
+                </div>
+            </header>
+
+            <div class="canvas-frame">
+                <canvas id="gameCanvas" width="600" height="400" tabindex="0" aria-label="BrickRush game area"></canvas>
+                <section id="levelCompleteScreen" class="level-complete" role="dialog" aria-modal="true" aria-labelledby="completionTitle" hidden>
+                    <div class="celebration-confetti" aria-hidden="true">
+                        <i></i><i></i><i></i><i></i><i></i><i></i>
+                        <i></i><i></i><i></i><i></i><i></i><i></i>
+                    </div>
+                    <div class="completion-content">
+                        <span class="completion-kicker">GRID CLEARED</span>
+                        <div class="completion-medal" aria-hidden="true">✦</div>
+                        <h2 id="completionTitle"><span id="completedLevel">LEVEL 01</span><br><span>COMPLETE!</span></h2>
+                        <p id="completionPoints">+000 POINTS</p>
+                        <button id="continueButton" type="button">NEXT LEVEL 02</button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="game-actions">
+                <span class="action-caption"><span class="action-mark">BR</span>ARCADE SERIES</span>
+                <div class="button-group">
+                    <button id="pauseButton" type="button" aria-pressed="false">Pause</button>
+                    <button id="startButton" type="button">Start Game</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <span>Powered by Codyza</span>
+            <span class="footer-note">BRICKRUSH <span>·</span> ENDLESS</span>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
