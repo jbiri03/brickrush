@@ -131,10 +131,9 @@ body {
 }
 
 .hud {
-    min-height: 76px;
     display: grid;
-    grid-template-columns: 1fr 0.72fr 1fr;
-    margin-bottom: 10px;
+    grid-template-columns: 1.25fr 1.25fr 0.7fr 0.8fr;
+    overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 5px;
     background: rgba(26, 39, 41, 0.94);
@@ -142,10 +141,11 @@ body {
 
 .stat-block {
     min-width: 0;
-    padding: 12px 17px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    min-height: 72px;
+    padding: 12px 14px 10px;
+    display: grid;
+    align-content: center;
+    gap: 4px;
 }
 
 .stat-block + .stat-block {
@@ -167,7 +167,8 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-.score-stat strong {
+.score-stat strong,
+.high-score-stat strong {
     color: var(--gold);
 }
 
@@ -175,22 +176,35 @@ body {
     color: #ff8178;
 }
 
-.level-stat {
-    position: relative;
-}
-
 .level-stat strong {
     color: var(--mint);
 }
 
-.best-level {
-    position: absolute;
-    right: 14px;
-    bottom: 12px;
-    color: var(--muted);
+.unlocked-banner {
+    grid-column: 1 / -1;
+    min-height: 38px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border-top: 1px solid rgba(255, 207, 90, 0.35);
+    color: var(--gold);
+    background: rgba(255, 207, 90, 0.09);
     font-family: "Lucida Console", Monaco, monospace;
-    font-size: 8px;
-    white-space: nowrap;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.unlock-star {
+    color: var(--gold);
+    font-size: 14px;
+}
+
+.unlocked-banner strong {
+    margin-left: auto;
+    color: var(--paper);
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
 }
 
 .canvas-frame {
@@ -327,21 +341,22 @@ body {
     }
 
     .hud {
-        min-height: 68px;
+        grid-template-columns: 1fr 1fr;
     }
 
     .stat-block {
-        padding: 10px;
+        min-height: 64px;
+        padding: 10px 12px;
     }
 
     .stat-block strong {
-        font-size: 18px;
+        font-size: 17px;
     }
 
-    .best-level {
-        right: 8px;
-        bottom: 8px;
-        font-size: 7px;
+    .unlocked-banner {
+        min-height: 36px;
+        padding: 0 11px;
+        font-size: 8px;
     }
 
     .canvas-frame {
@@ -498,5 +513,77 @@ body {
     .celebration-confetti i,
     .completion-medal {
         animation: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .level-complete {
+        padding: 8px;
+    }
+
+    .completion-medal {
+        width: 48px;
+        height: 48px;
+        margin: 8px 0 6px;
+        font-size: 27px;
+    }
+
+    .completion-content h2 {
+        font-size: 26px;
+    }
+
+    .completion-content p {
+        margin: 8px 0 12px;
+    }
+
+    #continueButton {
+        min-height: 36px;
+        padding: 0 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .level-complete {
+        padding: 4px;
+    }
+
+    .completion-kicker {
+        font-size: 9px;
+    }
+
+    .completion-medal {
+        width: 40px;
+        height: 40px;
+        margin: 6px 0 4px;
+        font-size: 23px;
+    }
+
+    .completion-content h2 {
+        font-size: 22px;
+    }
+
+    .completion-content p {
+        margin: 6px 0 8px;
+        font-size: 11px;
+    }
+
+    #continueButton {
+        min-height: 34px;
+    }
+}
+
+@media (max-width: 360px) {
+    .stat-block {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    .stat-block strong {
+        font-size: 15px;
+    }
+
+    .unlocked-banner {
+        gap: 6px;
+        font-size: 7px;
     }
 }
