@@ -227,6 +227,71 @@ body {
     touch-action: none;
 }
 
+.powerup-toast[hidden] {
+    display: none;
+}
+
+.powerup-toast {
+    position: absolute;
+    z-index: 1;
+    top: 18px;
+    left: 50%;
+    width: max-content;
+    max-width: calc(100% - 28px);
+    min-height: 54px;
+    padding: 8px 14px 8px 9px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    border: 1px solid var(--powerup-color, var(--mint));
+    border-radius: 5px;
+    color: var(--paper);
+    background: rgba(17, 26, 28, 0.94);
+    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.35), 0 0 18px color-mix(in srgb, var(--powerup-color, var(--mint)) 25%, transparent);
+    opacity: 0;
+    transform: translate(-50%, -12px) scale(0.96);
+    transition: opacity 180ms ease, transform 180ms ease;
+    pointer-events: none;
+}
+
+.powerup-toast.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+}
+
+.powerup-toast-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--ink);
+    background: var(--powerup-color, var(--mint));
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.powerup-toast-copy {
+    min-width: 0;
+    display: grid;
+    gap: 4px;
+}
+
+.powerup-toast-copy strong {
+    color: var(--powerup-color, var(--mint));
+    font: 700 11px "Lucida Console", Monaco, monospace;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.powerup-toast-copy > span {
+    color: var(--paper);
+    font: 9px "Lucida Console", Monaco, monospace;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
 .game-actions {
     min-height: 58px;
     display: flex;
@@ -585,5 +650,35 @@ body {
     .unlocked-banner {
         gap: 6px;
         font-size: 7px;
+    }
+}
+
+@media (max-width: 520px) {
+    .powerup-toast {
+        top: 12px;
+        min-height: 48px;
+        padding: 6px 10px 6px 7px;
+        gap: 8px;
+    }
+
+    .powerup-toast-icon {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+        font-size: 18px;
+    }
+
+    .powerup-toast-copy strong {
+        font-size: 10px;
+    }
+
+    .powerup-toast-copy > span {
+        font-size: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .powerup-toast {
+        transition: none;
     }
 }

@@ -50,6 +50,13 @@
 
             <div class="canvas-frame">
                 <canvas id="gameCanvas" width="600" height="400" tabindex="0" aria-label="BrickRush game area"></canvas>
+                <div id="powerUpToast" class="powerup-toast" role="status" aria-live="polite" aria-atomic="true" hidden>
+                    <span id="powerUpIcon" class="powerup-toast-icon" aria-hidden="true"></span>
+                    <span class="powerup-toast-copy">
+                        <strong id="powerUpName"></strong>
+                        <span id="powerUpDescription"></span>
+                    </span>
+                </div>
                 <section id="levelCompleteScreen" class="level-complete" role="dialog" aria-modal="true" aria-labelledby="completionTitle" hidden>
                     <div class="celebration-confetti" aria-hidden="true">
                         <i></i><i></i><i></i><i></i><i></i><i></i>
