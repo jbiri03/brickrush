@@ -4,6 +4,7 @@ const canvas = document.getElementById("gameCanvas");
 const context = canvas.getContext("2d");
 const keysPressed = new Set();
 const scoreElement = document.getElementById("score");
+const highScoreElement = document.getElementById("highScore");
 const livesElement = document.getElementById("lives");
 const levelElement = document.getElementById("level");
 const unlockedLevelElement = document.getElementById("unlockedLevel");
@@ -14,6 +15,7 @@ const completedLevelElement = document.getElementById("completedLevel");
 const completionPoints = document.getElementById("completionPoints");
 const continueButton = document.getElementById("continueButton");
 const progressStorageKey = "brickrush.highestUnlockedLevel";
+const highScoreStorageKey = "brickrush.highScore";
 
 const introLevelLayouts = [
     ["1111111", "1111111", "1111111", "1111111"],
@@ -39,8 +41,18 @@ function loadHighestUnlockedLevel() {
     }
 }
 
+function loadHighScore() {
+    try {
+        const savedScore = Number(window.localStorage.getItem(highScoreStorageKey));
+        return Number.isSafeInteger(savedScore) && savedScore >= 0 ? savedScore : 0;
+    } catch {
+        return 0;
+    }
+}
+
 const game = {
     score: 0,
+    highScore: loadHighScore(),
     lives: 3,
     level: 1,
     levelScoreStart: 0,
@@ -295,6 +307,14 @@ function update(deltaTime) {
         if (resolveBallRectCollision(brick)) {
             brick.active = false;
             game.score += 10;
+            if (game.score > game.highScore) {
+                game.highScore = game.score;
+                try {
+                    window.localStorage.setItem(highScoreStorageKey, String(game.highScore));
+                } catch {
+                    // The game remains playable when browser storage is unavailable.
+                }
+            }
             updateHud();
             break;
         }
@@ -386,10 +406,11 @@ function resetGame() {
 }
 
 function updateHud() {
-    scoreElement.textContent = String(game.score).padStart(6, "0");
+    scoreElement.textContent = game.score.toLocaleString("en-US", { minimumIntegerDigits: 6 });
+    highScoreElement.textContent = game.highScore.toLocaleString("en-US", { minimumIntegerDigits: 6 });
     livesElement.textContent = String(game.lives).padStart(2, "0");
     levelElement.textContent = String(game.level).padStart(2, "0");
-    unlockedLevelElement.textContent = `BEST ${String(game.highestUnlockedLevel).padStart(2, "0")}`;
+    unlockedLevelElement.textContent = String(game.highestUnlockedLevel).padStart(2, "0");
 }
 
 function draw() {
